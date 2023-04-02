@@ -1,7 +1,9 @@
 import random
 from typing import List
 import heapq
-
+import time
+import os
+import psutil
 
 # Get the real state as we sort the item
 def getRealState(realPos: list, state: list):
@@ -425,6 +427,11 @@ class RunAlgorithm:
             Gen = GeneticAlgorithm(testCase)
             Gen.run(fout)
 
-
+process = psutil.Process(os.getpid())
+start_time = time.time()
 runAlgorithm = RunAlgorithm()
 runAlgorithm.run()
+print("Runtime: --- %s seconds ---" % (time.time() - start_time) + '\n')
+print("Memory: --- ", end="")
+print(process.memory_info().rss / (1024 * 1024), end="")
+print(" MB ---", end="")
